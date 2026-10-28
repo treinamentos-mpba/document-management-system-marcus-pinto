@@ -73,7 +73,6 @@ function handleError(error, req, res, next) {
 }
 
 module.exports = {
-  uploadMiddleware: documentsService.uploadMiddleware,
   upload,
   list,
   download,

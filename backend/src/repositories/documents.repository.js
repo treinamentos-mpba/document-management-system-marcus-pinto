@@ -1,6 +1,7 @@
+const fsPromises = require('node:fs/promises');
 const path = require('node:path');
 
-const storageDirectory = path.resolve(__dirname, '../../storage');
+const storageDirectory = require('../config/storage');
 const documents = new Map();
 
 function toPublicDocument(document) {
@@ -31,11 +32,16 @@ function getFilePath(storedFilename) {
   return path.join(storageDirectory, storedFilename);
 }
 
+function removeStoredFile(storedFilename) {
+  return fsPromises.rm(getFilePath(storedFilename), { force: true });
+}
+
 module.exports = {
   storageDirectory,
   save,
   list,
   findById,
   getFilePath,
+  removeStoredFile,
   toPublicDocument
 };
